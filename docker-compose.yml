@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.4
+    container_name: usedmarket-mysql
+    ports:
+      - "3306:3306" # - 외부 접속 포트 : 컨테이너 내부 포트
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD} # - 사용할 루트 비밀번호
+      MYSQL_DATABASE: usedmarket_db # - 생성될 데이터 베이스 이름
+      TZ: Asia/Seoul # - 기준시간 : 한국
+    command:
+      - --character-set-server=utf8mb4 # - 한글, 특수문자 처리
+      - --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - db-data:/var/lib/mysql # - 데이터 영속성 보장
+
+## - Named Volume
+volumes:
+  db-data:
