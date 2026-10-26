@@ -1,21 +1,17 @@
 spring:
+  application:
+    name: Portfolio_UsedMarket
   config:
-    import: file:${user.dir}/.env[.properties]
+    import: optional:file:.env[.properties]
   datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: ${DB_URL}
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
-    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
-    show-sql: true
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: ${DDL_AUTO}
     properties:
       hibernate:
-        format_sql: true
-    defer-datasource-initialization: true
-
-## JWT SECRET KEY
-jwt:
-  secret:
-    key: ${JWT_SECRET_KEY}
+        format_sql: false
+    show-sql: true
